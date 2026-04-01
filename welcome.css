@@ -1,0 +1,277 @@
+body {
+   
+    background-color: #f9f7f2; 
+    background-image: linear-gradient(45deg, rgba(0,0,0,0.01) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.01) 50%, rgba(0,0,0,0.01) 75%, transparent 75%, transparent);
+    background-size: 100px 100px;
+    color: #1a1a1a; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #333;
+    margin-top: 20px;
+    font-weight: 300;
+}
+
+h2 {
+    color: firebrick;
+    margin: 3vh 7vw;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 1.8rem;
+}
+
+
+
+
+button{
+    height: 5vh;
+    width: 10vw;
+    background-color: #5f8fd7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #4a6fb3;
+}
+
+.sectionbutton{
+    height: 30vh;
+    width: 25vw;
+    background-color: #5fd7673c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 3rem;
+    border: 2px solid #5f8fd7;
+    margin: 2vh;
+    color: rgba(230, 71, 71, 0.952);
+    transition: 1s;
+    font-family: 'Times New Roman', Times, serif;
+}
+.sectionbutton:hover {
+    background-color: #5fd767;
+    width: 24vw;
+    height: 29vh;
+    color: rgba(230, 71, 71, 0.952);
+    border: 2px solid #850c08;
+}
+
+#buttoncontainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+}
+
+#buttoncontainerpanel{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 96vh;
+    padding: 2vh;
+}
+
+#ico{
+    font-size: 7rem;
+    color: royalblue;
+
+}
+
+#panellateral{
+    position: fixed;
+    top: 0vh;
+    left: 0vw;
+    width: fit-content;
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.buttonlateral{
+    height: 5vh;
+    width: 3vw;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+#cerrassession{
+    background-color: #ff0800;
+}
+
+#logincontainer{
+    position: fixed;
+    top: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items:end;
+    flex-direction: column;
+    width: 100%;
+    height: 96vh;
+    padding: 2vh;
+    background-color: rgb(211, 195, 174);
+    border: 2px solid #aeb9ef;
+    border-radius: 10px;
+    width: 30vw;
+    height: 70vh;
+}
+
+/* ===== MEDIA QUERY PARA MÓVILES (max-width: 600px) ===== */
+@media (max-width: 600px) {
+    body {
+        background-color: #f9f7f2;
+        background-image: linear-gradient(45deg, rgba(0,0,0,0.01) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.01) 50%, rgba(0,0,0,0.01) 75%, transparent 75%, transparent);
+        background-size: 100px 100px;
+        color: #1a1a1a;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h1 {
+        color: #333;
+        margin-top: 10vh;
+        font-weight: 300;
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        color: firebrick;
+        margin: 2vh 5vw;
+        font-family:'Times New Roman', Times, serif;
+        font-size: 1.3rem;
+    }
+
+    button {
+        height: 4vh;
+        width: auto;
+        padding: 0 12px;
+        background-color: #5f8fd7;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.85rem;
+    }
+
+    button:hover {
+        background-color: #4a6fb3;
+    }
+
+    .sectionbutton {
+        height: 20vh;
+        width: 80vw;
+        background-color: #5fd7673c;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.5rem;
+        border: 2px solid #5f8fd7;
+        margin: 1.5vh;
+        color: rgba(230, 71, 71, 0.952);
+        transition: 1s;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .sectionbutton:hover {
+        background-color: #5fd767;
+        width: 79vw;
+        height: 19.5vh;
+        color: rgba(230, 71, 71, 0.952);
+        border: 2px solid #850c08;
+    }
+
+    #buttoncontainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        gap: 2vh;
+    }
+
+    #buttoncontainerpanel {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 80vh;
+        padding: 0;
+        margin: 0;
+    }
+
+    #ico {
+        font-size: 3.5rem;
+        color: royalblue;
+    }
+
+    #panellateral {
+        position: fixed;
+        top: 0vh;
+        left: 0vw;
+        width: 18vw;
+        background-color: #f0f0f0;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .buttonlateral {
+        height: 6vh;
+        width: 9vw;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+        background-color: #5f8fd7;
+        color: white;
+    }
+
+    #cerrassession {
+        background-color: #ff0800;
+    }
+
+    #logincontainer {
+        position: fixed;
+        top: 15vh;
+        display: flex;
+        justify-content: center;
+        align-items: end;
+        flex-direction: column;
+        width: 90vw;
+        height: auto;
+        padding: 2vh;
+        background-color: rgb(211, 195, 174);
+        border: 2px solid #aeb9ef;
+        border-radius: 10px;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .logininput {
+        margin: 1vh 0;
+    }
+}

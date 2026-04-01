@@ -1,0 +1,41 @@
+/* --- CSS RESET --- */
+
+/* 1. Aplicamos box-sizing a todos los elementos. 
+   Esto hace que el padding y el border no sumen ancho extra al objeto. */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Quitamos los márgenes por defecto del body y aseguramos que ocupe el alto total */
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    font-family: sans-serif; /* Una fuente más limpia para empezar */
+}
+
+/* 3. Hacemos que las imágenes y videos sean fáciles de manejar */
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* 4. Quitamos estilos por defecto a elementos de formulario y botones */
+input, button, textarea, select {
+    font: inherit;
+}
+
+/* 5. Evitamos que las listas tengan puntos por defecto (muy útil para tu factura) */
+ul, ol {
+    list-style: none;
+}
+
+/* 6. Quitamos el subrayado de los enlaces */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* --- FIN DEL RESET --- */

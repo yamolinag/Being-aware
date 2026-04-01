@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Being aware Welcome</title>
+    <link rel="stylesheet" href="Reset.css">
+    <link rel="stylesheet" href="welcome.css">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    
+    <div id="logincontainer" style="display: none;">
+        <H1>Registrarse</H1>
+        <div class="logininput">
+        <label for="User">Usuario</label>
+        <input type="text" id="User" placeholder="Enter your username">
+        </div>
+        <div class="logininput">
+        <label for="Password">Contraseña</label>
+        <input type="password" id="Password" placeholder="Enter your password">
+        </div>
+        <div class="logininput">
+        <label for="E-mail">E-mail</label>
+        <input type="email" id="E-mail" placeholder="Enter your email">
+        </div>
+        <div class="logininput">
+        <button onclick="login()">Registrarse</button>
+                <H1>iniciar sesion</H1>
+        </div>
+        <div class="logininput">
+        <label for="Passwordsesion">Contraseña</label>
+        <input type="password" id="Passwordsesion" placeholder="Enter your password">
+        </div>
+        <div class="logininput">
+        <label for="E-mailsesion">E-mail</label>
+        <input type="email" id="E-mailsesion" placeholder="Enter your email">
+        </div>
+        <div class="logininput">
+        <button onclick="entrar()">Iniciar sesion</button>
+        </div>
+        <button onclick="cancelar()">cancelar</button>
+    </div>
+    <H1>Being aware</H1>
+    <p id="welcome-msg">¡Bienvenido a Being aware!</p>
+    <section>
+        <H2>Bienvenido a being aware</H2>
+        <p>¡Bienvenido a Being aware! Este sitio web está diseñado para mantenerte informado sobre todo lo relacionado con nuestro colegio. Aquí encontrarás noticias, eventos, actividades y un foro para compartir tus ideas y opiniones con otros miembros de la comunidad escolar. ¡Explora el sitio y mantente al tanto de todo lo que sucede en nuestro colegio!</p>
+        <div id="buttoncontainer">
+            <button onclick="changeSection('Being_aware_Forum.html')" class="sectionbutton">Ir al foro <div><span class="material-symbols-outlined" id="ico">forum</span></div></button>
+            <button onclick="changeSection('news.html')" class="sectionbutton">ver noticias <div><span class="material-symbols-outlined" id="ico">newspaper</span></div></button>
+        </div>
+    </section>
+    <details id="panellateral">
+        <summary><span class="material-symbols-outlined">menu</span></summary>
+<div id="buttoncontainerpanel">
+    <button onclick="cerrarSesion()" id="cerrassession"class="buttonlateral"><span class="material-symbols-outlined">logout</span></button>
+    <button id="login" onclick="registrarse()"class="buttonlateral"><span class="material-symbols-outlined">login</span></button>
+    <button onclick="changeSection('Being_aware_welcome.html')"class="buttonlateral"><span class="material-symbols-outlined">home</span></button>
+    <button onclick="changeSection('Being_aware_Forum.html')"class="buttonlateral"><span class="material-symbols-outlined">forum</span></button>
+            <button onclick="changeSection('news.html')"class="buttonlateral"><span class="material-symbols-outlined">newspaper</span></button>    
+</div>
+    </details>
+    <Script type="module" src="Welcome.js"></Script>
+</body>
+</html>

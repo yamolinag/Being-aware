@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>news</title>
+    <link rel="stylesheet" href="news.css">
+    <link rel="stylesheet" href="Reset.css">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+</head>
+<body>
+       <details id="panellateral">
+        <summary><span class="material-symbols-outlined">menu</span></summary>
+<div id="buttoncontainerpanel">
+    <button onclick="changeSection('Being_aware_welcome.html')" class="buttonlateral"><span class="material-symbols-outlined">home</span></button>
+    <button onclick="changeSection('Being_aware_Forum.html')" class="buttonlateral"><span class="material-symbols-outlined">forum</span></button>
+    <button onclick="changeSection('news.html')" class="buttonlateral"><span class="material-symbols-outlined">newspaper</span></button>
+</div>
+    </details>
+  <div id="searchbar">
+    <label>buscador</label>
+    <input type="text"id="mondongo"></input>
+  </div>
+  <H1>Being aware</H1>
+  <H2>Noticias</H2>
+  <div id="contenedornoticias"></div>
+  <div id="ventana">
+ <div>
+     <lable>titulo de la noticia</lable>
+    <input type="text" id="titulonoticia"></input>
+ </div>
+
+<div>
+    <lable>noticia</lable>
+<textarea placeholder="Escriba aquí su noticia..." id="noticia" rows="2"></textarea>
+</div>
+ <button onclick="guardarNoticia()">Guardar</button>
+ <button onclick="cancelar()">cancelar</button>
+</div>
+  <button onclick="mostrarventana()" id="subirnoticia">subir noticia</button>
+  <script type="module" src="news.js"></script>
+</body>
+</html>

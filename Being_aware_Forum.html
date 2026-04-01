@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Being aware Forum</title>
+    <link rel="stylesheet" href="Being_aware_Forum.css">
+    <link rel="stylesheet" href="Reset.css">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+</head>
+<body>
+    
+       <details id="panellateral">
+        <summary><span class="material-symbols-outlined">menu</span></summary>
+<div id="buttoncontainerpanel">
+    <button onclick="changeSection('Being_aware_welcome.html')"class="buttonlateral"><span class="material-symbols-outlined">home</span></button>
+    <button onclick="changeSection('Being_aware_Forum.html')"class="buttonlateral"><span class="material-symbols-outlined">forum</span></button>
+            <button onclick="changeSection('news.html')"class="buttonlateral"><span class="material-symbols-outlined">newspaper</span></button>    
+</div>
+    </details>
+    <h1>Being aware</h1>
+    <section>
+        <h2>Foro</h2>
+        <p>¡Mantente al tanto de la situación del colegio! Aquí encontrarás información actualizada sobre eventos, actividades y noticias relacionadas con nuestra comunidad escolar. ¡No te pierdas nada importante!</p>
+        <div id="messagecontainer">
+            <p>Mensajes</p>
+        </div>
+        <div id="invisiblebox"></div>
+        
+        <div id="textinputcontainersuperior">
+            <p>¡Participa en el foro para discutir temas importantes y compartir ideas con otros miembros de la comunidad escolar!</p>
+            <div id="textinputcontainer">
+                <textarea id="textInput" placeholder="Escribe tu mensaje aquí..." rows="1"></textarea>
+                <button onclick="enviarMensaje()"><span class="material-symbols-outlined"id="sendico">send</span></button>
+  </div>
+        </div>
+    </section>
+    <script type="module" src="Being_aware_Forum.js"></script>
+</body>
+</html>

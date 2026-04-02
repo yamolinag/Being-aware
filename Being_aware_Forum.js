@@ -4,7 +4,6 @@ const supabaseUrl = 'https://mtdblkrntsoeilwmhzgn.supabase.co';
 const supabaseKey = 'sb_publishable_GKCUvPhh26exHDuzbRtaAg_i2dulF0-'; 
 const supabase = createClient(supabaseUrl, supabaseKey);
 const messageContainer = document.getElementById('messagecontainer');
-
 async function Getuserdata(){
 const { data: { user }, error } = await supabase.auth.getUser();
     if (error || !user) return null;
@@ -13,45 +12,96 @@ const { data: { user }, error } = await supabase.auth.getUser();
 
 
 async function enviarMensaje() {
-    const textInput = document.getElementById('textInput'); 
+    const fileInput = document.getElementById('fileInput');
+    const file = fileInput.files[0];
+    const textInput = document.getElementById('textInput');
     const texto = textInput.value;
+
     if (!texto.trim()) {
         alert('Por favor, ingresa un mensaje antes de enviar.');
         return;
-    } if (texto.length > 500) {
+    }
+
+    if (texto.length > 500) {
         alert('El mensaje es demasiado largo. Por favor, limita tu mensaje a 500 caracteres.');
         return;
     }
- const usuarioActivo = await Getuserdata();
 
+    const usuarioActivo = await Getuserdata();
     if (!usuarioActivo) {
-        alert("Debes iniciar sesión para enviar un mensaje.");
+        alert('Debes iniciar sesión para enviar un mensaje.');
         return;
-    }   
+    }
 
-    const {error} = await supabase
+    let fileUrl = null;
+
+    if (file) {
+        const allowedMimeTypes = [
+            'image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml',
+            'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/vnd.ms-excel',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'application/vnd.ms-powerpoint',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+        ];
+
+        const allowedExtensions = ['.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx'];
+        const lowercaseName = file.name.toLowerCase();
+        const hasAllowedExt = allowedExtensions.some(ext => lowercaseName.endsWith(ext));
+
+        if (!allowedMimeTypes.includes(file.type) && !hasAllowedExt) {
+            alert('Tipo de archivo no soportado. Usa imágenes o documentos de Office (.docx, .xlsx, .pptx).');
+            return;
+        }
+
+        const fileName = `${Date.now()}_${file.name}`;
+        const { data: uploadData, error: uploadError } = await supabase.storage
+            .from('Archivos')
+            .upload(fileName, file);
+
+        if (uploadError) {
+            console.error('Error al subir el archivo:', uploadError);
+            alert('Error al subir el archivo. Por favor, intenta nuevamente.');
+            return;
+        }
+
+        console.log('Archivo subido exitosamente:', uploadData);
+
+        const { data: urlData, error: urlError } = await supabase.storage
+            .from('Archivos')
+            .getPublicUrl(fileName);
+
+
+        fileUrl = urlData.publicUrl;
+        console.log('URL pública del archivo:', fileUrl);
+    } else {
+        console.log('No se ha seleccionado ningún archivo, enviando solo el mensaje de texto.');
+    }
+
+    const { error } = await supabase
         .from('mensajes')
-        .insert([{ 
-            text: texto, 
-            user: usuarioActivo.user_metadata.display_name, 
-            date: new Date().toISOString() 
+        .insert([{
+            text: texto,
+            user: usuarioActivo.user_metadata.display_name,
+            date: new Date().toISOString(),
+            fileurl: fileUrl,
         }]);
-    
 
     if (error) {
         console.error('Error al enviar:', error);
     } else {
         textInput.value = '';
+        fileInput.value = '';
         obtenerMensajes();
     }
-
 }
 
 async function obtenerMensajes() {
     const { data, error } = await supabase
         .from('mensajes')
         .select('*')
-        .order('date', { ascending: true }); 
+        .order('date', { ascending: false }); 
 
     if (error) {
         console.error('Error al obtener:', error);
@@ -75,16 +125,23 @@ async function renderMessages(mensajes) {
             messageElement.className = 'message';
         }
 
+        const isImageFile = msg.fileurl && msg.fileurl.match(/\.(jpg|jpeg|png|gif|webp|svg)$/i);
+        const fileHtml = msg.fileurl ? (isImageFile
+            ? `\n                <a href="${msg.fileurl}" target="_blank"><img src="${msg.fileurl}" alt="Imagen adjunta" class="message-image" loading="lazy" /></a>\n            `
+            : `\n                <a href="${msg.fileurl}" target="_blank" download class="btn-descargar">\n                    <span class="material-symbols-outlined">download</span> Descargar documento\n                </a>\n            `)
+            : '';
         messageElement.innerHTML = `
             <h3>${msg.user}</h3>
             <p>${msg.text}</p>
             <h5>${fechaLegible}</h5>
-            ${msg.user === miNombre ? `<button onclick="eliminarMensaje('${msg.id}','${msg.user}')" id="eliminarMensaje"><span class="material-symbols-outlined"id="deleteico">delete</span></button>` : ''}
+            ${fileHtml}
+            ${msg.user === miNombre ? `<button onclick="eliminarMensaje('${msg.id}','${msg.user}')" id="eliminarMensaje"><span class="material-symbols-outlined" id="deleteico">delete</span></button>` : ''}
             <hr>
         `;
 
-        messageContainer.appendChild(messageElement);
+        messageContainer.prepend(messageElement);
     });
+    window.scrollTo(0, document.body.scrollHeight);
 }
 
 async function eliminarMensaje(params,usuarioMensaje) {

@@ -20,8 +20,8 @@
 </div>
     </details>
   <div id="searchbar">
-    <label>buscador</label>
-    <input type="text"id="mondongo"></input>
+    <input type="text"id="mondongo"placeholder="Buscar..."></input>
+    <button><span class="material-symbols-outlined">search</span></button>
   </div>
   <H1>Being aware</H1>
   <H2>Noticias</H2>
@@ -36,10 +36,10 @@
     <lable>noticia</lable>
 <textarea placeholder="Escriba aquí su noticia..." id="noticia" rows="2"></textarea>
 </div>
- <button onclick="guardarNoticia()">Guardar</button>
- <button onclick="cancelar()">cancelar</button>
+ <button onclick="guardarNoticia()" class="buttons"><span class="material-symbols-outlined">save</span></button>
+ <button onclick="cancelar()" class="buttons"><span class="material-symbols-outlined">cancel</span></button>
 </div>
-  <button onclick="mostrarventana()" id="subirnoticia">subir noticia</button>
+  <button onclick="mostrarventana()" id="subirnoticia" class="buttons"><span class="material-symbols-outlined">upload</span></button>
   <script type="module" src="news.js"></script>
 </body>
 </html>

@@ -204,6 +204,17 @@ async function changeSection(section) {
     window.location.href = section;
 }
 
+document.getElementById('fileInput').addEventListener('change', function() {
+    const label = document.querySelector('.custom-file-upload');
+    if (this.files && this.files.length > 0) {
+        label.style.backgroundColor = "#28a745"; // Cambia a verde si hay foto
+        label.innerHTML = `<span class="material-symbols-outlined">check_circle</span> Foto lista`;
+    } else {
+        label.style.backgroundColor = "#5f8fd7";
+        label.innerHTML = `<span class="material-symbols-outlined">image</span> Adjuntar`;
+    }
+});
+
 window.changeSection = changeSection;
 window.enviarMensaje = enviarMensaje;
 obtenerMensajes();

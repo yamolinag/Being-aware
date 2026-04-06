@@ -27,15 +27,23 @@
   <H2>Noticias</H2>
   <div id="contenedornoticias"></div>
   <div id="ventana">
- <div>
+ <div class="seccionventana">
      <lable>titulo de la noticia</lable>
     <input type="text" id="titulonoticia"></input>
  </div>
 
-<div>
+<div class="seccionventana">
     <lable>noticia</lable>
 <textarea placeholder="Escriba aquí su noticia..." id="noticia" rows="2"></textarea>
 </div>
+<div class="seccionventana">
+    <label for="fileInput" class="custom-file-upload">
+        <span class="material-symbols-outlined">image</span>
+        Añadir foto de la noticia
+</label>
+<input type="file" id="fileInput" accept="image/*" />
+</div>
+    
  <button onclick="guardarNoticia()" class="buttons"><span class="material-symbols-outlined">save</span></button>
  <button onclick="cancelar()" class="buttons"><span class="material-symbols-outlined">cancel</span></button>
 </div>

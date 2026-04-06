@@ -53,6 +53,10 @@ async function login() {
     const EMail = document.getElementById('E-mail').value;
     const Password = document.getElementById('Password').value;
     loginContainer.style.display = 'block';
+    if(Password.length < 6){
+        window.alert("La contraseña debe tener al menos 6 caracteres.");
+        return;
+    }   
 const {data, error} = await supabase.auth.signUp({
     email: EMail,
     password: Password,

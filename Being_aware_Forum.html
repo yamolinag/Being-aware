@@ -28,13 +28,18 @@
         </div>
         <div id="invisiblebox"></div>
         
-        <div id="textinputcontainersuperior">
-            <input type="file" id="fileInput" accept="image/*,.doc,.docx,.xls,.xlsx,.ppt,.pptx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation" >
-            <div id="textinputcontainer">
-                <textarea id="textInput" placeholder="Escribe tu mensaje aquí..." rows="1"></textarea>
-                <button onclick="enviarMensaje()"><span class="material-symbols-outlined"id="sendico">send</span></button>
-  </div>
-        </div>
+<div id="textinputcontainersuperior">
+    <label for="fileInput" class="custom-file-upload">
+        <span class="material-symbols-outlined">image</span>
+        Adjuntar
+    </label>
+    <input type="file" id="fileInput" accept="image/*" />
+
+    <div id="textinputcontainer">
+        <textarea id="textInput" placeholder="Escribe tu mensaje aquí..." rows="1"></textarea>
+        <button onclick="enviarMensaje()"><span class="material-symbols-outlined" id="sendico">send</span></button>
+    </div>
+</div>
     </section>
     <script type="module" src="Being_aware_Forum.js"></script>
 </body>

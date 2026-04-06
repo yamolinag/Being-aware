@@ -25,11 +25,34 @@ function mostrarventana(){
 }
 
 async function guardarNoticia() {
+    const FileInput = document.getElementById('fileInput');
+    const file = FileInput.files[0];
+    const fileName = `${Date.now()}_${file.name}`;
+    const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('Archivos')
+        .upload(fileName, file);
+    if (uploadError) {
+        console.error('Error al subir archivo:', uploadError);
+        window.alert("Error al subir el archivo. Por favor, inténtalo de nuevo.");
+        return;
+    }
+    console.log('Archivo subido:', uploadData);
+    const {data: ulrData, error: urlError} = await supabase.storage
+        .from('Archivos')
+        .getPublicUrl(fileName);
+    if (urlError) {
+        console.error('Error al obtener URL pública:', urlError);
+        window.alert("Error al obtener la URL de la imagen. Por favor, inténtalo de nuevo.");
+        return;
+    }
+    console.log('URL pública obtenida:', ulrData);
+    const fileUrl = ulrData.publicUrl;
     const nuevaNoticia = [{ 
         titulo: document.getElementById('titulonoticia').value,
         noticia: document.getElementById('noticia').value,
         date: new Date().toISOString(),
-        autor: (await Getuserdata()).user_metadata.display_name
+        autor: (await Getuserdata()).user_metadata.display_name,
+        imagen: fileUrl
      }];
     const { error } = await supabase 
     .from('noticias')
@@ -72,6 +95,7 @@ function rennderNews(news) {
         noticiaElement.classList.add('noticia');
         noticiaElement.innerHTML = `
         <div class="noticias">
+        ${noticia.imagen ? `<img src="${noticia.imagen}" alt="Imagen de la noticia" class="noticia-imagen">` : ''} 
             <h3>${noticia.titulo}</h3>
             <p>${noticia.noticia}</p>
             <p><em>Publicado por ${noticia.autor} el ${new Date(noticia.date).toLocaleString()}</em></p>
@@ -99,6 +123,16 @@ function rennderNews(news) {
 
     window.location.href = section;
 }
+document.getElementById('fileInput').addEventListener('change', function() {
+    const label = document.querySelector('.custom-file-upload');
+    if (this.files && this.files.length > 0) {
+        label.style.backgroundColor = "#28a745"; // Cambia a verde si hay foto
+        label.innerHTML = `<span class="material-symbols-outlined">check_circle</span> Foto lista`;
+    } else {
+        label.style.backgroundColor = "#5f8fd7";
+        label.innerHTML = `<span class="material-symbols-outlined">image</span> Añadir foto de la noticia`;
+    }
+});
 
 window.changeSection = changeSection;
 window.mostrarventana = mostrarventana;

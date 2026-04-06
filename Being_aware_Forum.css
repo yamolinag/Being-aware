@@ -204,6 +204,39 @@ button{
 button:hover {
     background-color: #4a6fb3;
 }
+/* 1. Escondemos el input real pero que siga funcionando */
+#fileInput {
+    display: none;
+}
+
+/* 2. Estilizamos el label para que parezca un botón */
+.custom-file-upload {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #5f8fd7; /* El azul de tus botones */
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background-color 0.3s;
+    height: 4vh; /* Para que mida lo mismo que tu botón de enviar */
+}
+
+.custom-file-upload:hover {
+    background-color: #4a76b8;
+}
+
+/* 3. Ajuste para que el contenedor no se amontone */
+#textinputcontainersuperior {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: #fff;
+    border-top: 1px solid #ccc;
+}
 
 /* ===== MEDIA QUERY PARA MÓVILES (max-width: 600px) ===== */
 @media (max-width: 600px) {
@@ -311,6 +344,28 @@ button:hover {
         display: flex;
         width: 100%;
         gap: 8px;
+    }
+
+    #fileInput {
+        display: none;
+    }
+
+    .custom-file-upload {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background-color: #5f8fd7;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        transition: background-color 0.3s;
+        height: 4vh;
+    }
+
+    .custom-file-upload:hover {
+        background-color: #4a76b8;
     }
 
     #textInput {

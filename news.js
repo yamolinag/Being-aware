@@ -3,13 +3,20 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 const supabaseUrl = 'https://mtdblkrntsoeilwmhzgn.supabase.co';
 const supabaseKey = 'sb_publishable_GKCUvPhh26exHDuzbRtaAg_i2dulF0-'; 
 const supabase = createClient(supabaseUrl, supabaseKey);
-Getuserdata()
+
 async function Getuserdata(){
-const { data: { user }, error } = await supabase.auth.getUser();
+    const { data: { user }, error } = await supabase.auth.getUser();
     if (error || !user) return null;
-    return user;;
+    return user;
 }
-obtenerNoticias();
+
+// Exponer función al window
+window.Getuserdata = Getuserdata;
+
+// Inicializar después de que el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    obtenerNoticias();
+});
 
 
 const ventana = document.getElementById("ventana");
@@ -105,7 +112,7 @@ function rennderNews(news) {
     });
 }async function changeSection(section) {
     const paginasPublicas = [
-        'Being_aware_welcome.html',
+        'index.html',
         'Being_aware_Forum.html',
         'news.html'
     ];
@@ -134,7 +141,9 @@ document.getElementById('fileInput').addEventListener('change', function() {
     }
 });
 
+// Exponer todas las funciones al window
 window.changeSection = changeSection;
 window.mostrarventana = mostrarventana;
 window.guardarNoticia = guardarNoticia;
 window.cancelar = cancelar;
+window.obtenerNoticias = obtenerNoticias;

@@ -1,5 +1,6 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
+
 const supabaseUrl = 'https://mtdblkrntsoeilwmhzgn.supabase.co';
 const supabaseKey = 'sb_publishable_GKCUvPhh26exHDuzbRtaAg_i2dulF0-'; 
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -9,7 +10,7 @@ const { data: { user }, error } = await supabase.auth.getUser();
     if (error || !user) return null;
     return user;;
 }
-
+const usuarioActivo = await Getuserdata();
 
 async function enviarMensaje() {
     const fileInput = document.getElementById('fileInput');
@@ -27,7 +28,6 @@ async function enviarMensaje() {
         return;
     }
 
-    const usuarioActivo = await Getuserdata();
     if (!usuarioActivo) {
         alert('Debes iniciar sesión para enviar un mensaje.');
         return;
@@ -93,8 +93,10 @@ async function enviarMensaje() {
     } else {
         textInput.value = '';
         fileInput.value = '';
-        obtenerMensajes();
     }
+    const label = document.querySelector('.custom-file-upload');
+label.style.backgroundColor = "#5f8fd7";
+        label.innerHTML = `<span class="material-symbols-outlined">image</span> Adjuntar`;
 }
 
 async function obtenerMensajes() {
@@ -106,15 +108,47 @@ async function obtenerMensajes() {
     if (error) {
         console.error('Error al obtener:', error);
     } else {
-        renderMessages(data);
+        return (data);
     }
+    
+}
+async function rendernewMessage() {
+    const mensages = await obtenerMensajes();
+    const msg = mensages[0];
+    const messageElement = document.createElement('div');
+    const fechaLegible = new Date(msg.date).toLocaleString();
+    const usuarioActivo = await Getuserdata();
+    const miNombre = usuarioActivo ? usuarioActivo.user_metadata.display_name : null;
+        if (msg.user === miNombre) {
+            messageElement.className = 'messageown';
+        } else {
+            messageElement.className = 'message';
+        }
+
+        const isImageFile = msg.fileurl && msg.fileurl.match(/\.(jpg|jpeg|png|gif|webp|svg)$/i);
+        const fileHtml = msg.fileurl ? (isImageFile
+            ? `\n                <a href="${msg.fileurl}" target="_blank"><img src="${msg.fileurl}" alt="Imagen adjunta" class="message-image" loading="lazy" /></a>\n            `
+            : `\n                <a href="${msg.fileurl}" target="_blank" download class="btn-descargar">\n                    <span class="material-symbols-outlined">download</span> Descargar documento\n                </a>\n            `)
+            : '';
+        messageElement.innerHTML = `
+            <h3>${msg.user}</h3>
+            <p>${msg.text}</p>
+            <h5>${fechaLegible}</h5>
+            ${fileHtml}
+            ${msg.user === miNombre ? `<button onclick="eliminarMensaje('${msg.id}','${msg.user}')" id="eliminarMensaje"><span class="material-symbols-outlined" id="deleteico">delete</span></button>` : ''}
+            <hr>
+        `;
+
+        messageContainer.appendChild(messageElement);
+        window.scrollTo(0, document.body.scrollHeight);
 }
 
-async function renderMessages(mensajes) {
+async function renderMessages() {
     messageContainer.innerHTML = '';
     const usuarioActivo = await Getuserdata();
     const miNombre = usuarioActivo ? usuarioActivo.user_metadata.display_name : null;
 
+    const mensajes = await obtenerMensajes();
     mensajes.forEach((msg) => {
         const messageElement = document.createElement('div');
         const fechaLegible = new Date(msg.date).toLocaleString();
@@ -155,7 +189,7 @@ async function eliminarMensaje(params,usuarioMensaje) {
             .from('mensajes')
             .delete()
             .eq('id', params);
-        obtenerMensajes();
+        renderMessages();
         window.alert('El mensaje ha sido eliminado, Recuerda que los mensajes eliminados no se pueden recuperar, por lo que debes estar seguro antes de eliminar un mensaje.');
         if (error) {
             console.error('Error al eliminar:', error);
@@ -167,24 +201,29 @@ async function eliminarMensaje(params,usuarioMensaje) {
         window.alert('No puedes eliminar un mensaje que no es tuyo, Recuerda que los mensajes eliminados no se pueden recuperar, por lo que debes estar seguro antes de eliminar un mensaje.');
     }
 }
+
+// Exponer funciones al objeto window para que estén disponibles globalmente
+window.enviarMensaje = enviarMensaje;
+window.eliminarMensaje = eliminarMensaje;
+window.renderMessages = renderMessages;
 const canalMensajes = supabase
   .channel('cambios-en-mensajes') 
   .on(
     'postgres_changes', 
     { 
-      event: '*', 
+      event: 'insert', 
       schema: 'public', 
       table: 'mensajes' 
     }, 
     (payload) => {
       console.log('¡Cambio detectado en la base de datos!', payload);
-      obtenerMensajes(); 
+      rendernewMessage(); 
     }
   )
   .subscribe();
 async function changeSection(section) {
     const paginasPublicas = [
-        'Being_aware_welcome.html',
+        'index.html',
         'Being_aware_Forum.html',
         'news.html'
     ];
@@ -214,8 +253,8 @@ document.getElementById('fileInput').addEventListener('change', function() {
         label.innerHTML = `<span class="material-symbols-outlined">image</span> Adjuntar`;
     }
 });
-
+window.rendernewMessage = rendernewMessage;
 window.changeSection = changeSection;
 window.enviarMensaje = enviarMensaje;
-obtenerMensajes();
+renderMessages();
 window.eliminarMensaje = eliminarMensaje;

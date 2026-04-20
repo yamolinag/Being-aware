@@ -89,6 +89,7 @@ const {data, error} = await supabase.auth.signUp({
         }
         if (error) {
             console.error('Error al iniciar sesión:', error);
+            window.alert("Error al iniciar sesión: " + error.message);
         } else {
             console.log('Usuario conectado:', data);
             location.reload();
@@ -96,9 +97,8 @@ const {data, error} = await supabase.auth.signUp({
         }
     }
 
-
-const usuarioActivo = await Getuserdata();
-function changeSection(section) {
+async function changeSection(section) {
+    const usuarioActivo = await Getuserdata();
     if (!usuarioActivo) {
         alert("Debes iniciar sesión para acceder a esta sección.");
         return;
@@ -107,9 +107,11 @@ function changeSection(section) {
     }
 }
 
+// Exponer todas las funciones al window
 window.changeSection = changeSection;
 window.registrarse = registrarse;
 window.entrar = entrar;
 window.login = login;   
 window.cerrarSesion = cerrarSesion;
 window.cancelar = cancelar;
+window.Getuserdata = Getuserdata;

@@ -33,27 +33,32 @@ function mostrarventana(){
 
 async function guardarNoticia() {
     const FileInput = document.getElementById('fileInput');
-    const file = FileInput.files[0];
-    const fileName = `${Date.now()}_${file.name}`;
-    const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('Archivos')
-        .upload(fileName, file);
-    if (uploadError) {
-        console.error('Error al subir archivo:', uploadError);
-        window.alert("Error al subir el archivo. Por favor, inténtalo de nuevo.");
-        return;
+    const file = FileInput.files?.[0];
+    let fileUrl = null;
+
+    if (file) {
+        const fileName = `${Date.now()}_${file.name}`;
+        const { data: uploadData, error: uploadError } = await supabase.storage
+            .from('Archivos')
+            .upload(fileName, file);
+        if (uploadError) {
+            console.error('Error al subir archivo:', uploadError);
+            window.alert("Error al subir el archivo. Por favor, inténtalo de nuevo.");
+            return;
+        }
+        console.log('Archivo subido:', uploadData);
+        const {data: ulrData, error: urlError} = await supabase.storage
+            .from('Archivos')
+            .getPublicUrl(fileName);
+        if (urlError) {
+            console.error('Error al obtener URL pública:', urlError);
+            window.alert("Error al obtener la URL de la imagen. Por favor, inténtalo de nuevo.");
+            return;
+        }
+        console.log('URL pública obtenida:', ulrData);
+        fileUrl = ulrData.publicUrl;
     }
-    console.log('Archivo subido:', uploadData);
-    const {data: ulrData, error: urlError} = await supabase.storage
-        .from('Archivos')
-        .getPublicUrl(fileName);
-    if (urlError) {
-        console.error('Error al obtener URL pública:', urlError);
-        window.alert("Error al obtener la URL de la imagen. Por favor, inténtalo de nuevo.");
-        return;
-    }
-    console.log('URL pública obtenida:', ulrData);
-    const fileUrl = ulrData.publicUrl;
+    
     const nuevaNoticia = [{ 
         titulo: document.getElementById('titulonoticia').value,
         noticia: document.getElementById('noticia').value,
@@ -61,6 +66,8 @@ async function guardarNoticia() {
         autor: (await Getuserdata()).user_metadata.display_name,
         imagen: fileUrl
      }];
+     (nuevaNoticia[0].titulo === '' || nuevaNoticia[0].noticia === '') ? window.alert("Por favor, completa todos los campos antes de guardar."): null;
+        if (nuevaNoticia[0].titulo === '' || nuevaNoticia[0].noticia === '') return;
     const { error } = await supabase 
     .from('noticias')
     .insert(nuevaNoticia);
@@ -74,6 +81,12 @@ async function guardarNoticia() {
         document.getElementById('noticia').value = '';
         ventana.style.display = "none";
         obtenerNoticias();
+        FileInput.value = '';
+        const label = document.querySelector('.custom-file-upload');
+        if (label) {
+            label.style.backgroundColor = "#5f8fd7";
+            label.innerHTML = `<span class="material-symbols-outlined">image</span> Añadir foto de la noticia`;
+        }
     };
 }
 async function obtenerNoticias() {
@@ -141,7 +154,30 @@ document.getElementById('fileInput').addEventListener('change', function() {
     }
 });
 
-// Exponer todas las funciones al window
+async function searchnews(){
+    const search = document.getElementById('mondongo').value.toLowerCase();
+    const { data, error } = await supabase
+        .from('noticias')
+        .select('*')
+        .order('date', { ascending: false });
+    if (error) {
+        console.error('Error al obtener noticias:', error);
+        Window.alert("Error al buscar noticias. Por favor, inténtalo de nuevo.");
+        return;
+    }
+    const filteredNews = data.filter(noticia =>
+        noticia.titulo.toLowerCase().includes(search) ||
+        noticia.noticia.toLowerCase().includes(search) ||
+        noticia.autor.toLowerCase().includes(search)
+    );
+    rennderNews(filteredNews);
+}
+function limpiarBusqueda() {
+    document.getElementById('mondongo').value = '';
+    obtenerNoticias();
+}
+window.limpiarBusqueda = limpiarBusqueda;
+window.searchnews = searchnews;
 window.changeSection = changeSection;
 window.mostrarventana = mostrarventana;
 window.guardarNoticia = guardarNoticia;

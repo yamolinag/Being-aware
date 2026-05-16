@@ -21,7 +21,8 @@
     </details>
   <div id="searchbar">
     <input type="text"id="mondongo"placeholder="Buscar..."></input>
-    <button><span class="material-symbols-outlined">search</span></button>
+    <button onclick="searchnews()"><span class="material-symbols-outlined">search</span></button>
+    <button onclick="limpiarBusqueda()"><span class="material-symbols-outlined">clear</span></button>
   </div>
   <H1>Being aware</H1>
   <H2>Noticias</H2>
@@ -34,6 +35,7 @@
 
 <div class="seccionventana">
     <lable>noticia</lable>
+    <hr>
 <textarea placeholder="Escriba aquí su noticia..." id="noticia" rows="2"></textarea>
 </div>
 <div class="seccionventana">
@@ -43,9 +45,10 @@
 </label>
 <input type="file" id="fileInput" accept="image/*" />
 </div>
+<div id="box"></div>
     
- <button onclick="guardarNoticia()" class="buttons"><span class="material-symbols-outlined">save</span></button>
- <button onclick="cancelar()" class="buttons"><span class="material-symbols-outlined">cancel</span></button>
+ <button onclick="guardarNoticia()" id="buttonventana1"><span class="material-symbols-outlined">save</span>Guardar</button>
+ <button onclick="cancelar()" id="buttonventana2"><span class="material-symbols-outlined">cancel</span></button>
 </div>
   <button onclick="mostrarventana()" id="subirnoticia" class="buttons"><span class="material-symbols-outlined">upload</span></button>
   <script type="module" src="news.js"></script>

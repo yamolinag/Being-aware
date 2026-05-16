@@ -40,18 +40,25 @@ async function enviarMensaje() {
             'image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml',
             'application/msword',
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/vnd.ms-word.document.macroenabled.12',
             'application/vnd.ms-excel',
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'application/vnd.ms-excel.sheet.macroenabled.12',
             'application/vnd.ms-powerpoint',
-            'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            'application/vnd.ms-powerpoint.presentation.macroenabled.12',
+            'application/pdf',
+            'text/plain',
+            'application/rtf',
+            'application/vnd.oasis.opendocument.text'
         ];
 
-        const allowedExtensions = ['.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx'];
+        const allowedExtensions = ['.doc', '.docx', '.docm', '.xls', '.xlsx', '.xlsm', '.ppt', '.pptx', '.pptm', '.ppsx', '.pdf', '.txt', '.rtf', '.odt'];
         const lowercaseName = file.name.toLowerCase();
         const hasAllowedExt = allowedExtensions.some(ext => lowercaseName.endsWith(ext));
 
         if (!allowedMimeTypes.includes(file.type) && !hasAllowedExt) {
-            alert('Tipo de archivo no soportado. Usa imágenes o documentos de Office (.docx, .xlsx, .pptx).');
+            window.alert('Tipo de archivo no soportado. Usa imágenes o documentos de Office (.docx, .xlsx, .pptx).');
             return;
         }
 
@@ -86,7 +93,7 @@ async function enviarMensaje() {
             user: usuarioActivo.user_metadata.display_name,
             date: new Date().toISOString(),
             fileurl: fileUrl,
-        }]);
+           }]);
 
     if (error) {
         console.error('Error al enviar:', error);
@@ -96,7 +103,7 @@ async function enviarMensaje() {
     }
     const label = document.querySelector('.custom-file-upload');
 label.style.backgroundColor = "#5f8fd7";
-        label.innerHTML = `<span class="material-symbols-outlined">image</span> Adjuntar`;
+        label.innerHTML = `<span class="material-symbols-outlined">upload</span> Adjuntar`;
 }
 
 async function obtenerMensajes() {
@@ -247,10 +254,10 @@ document.getElementById('fileInput').addEventListener('change', function() {
     const label = document.querySelector('.custom-file-upload');
     if (this.files && this.files.length > 0) {
         label.style.backgroundColor = "#28a745"; // Cambia a verde si hay foto
-        label.innerHTML = `<span class="material-symbols-outlined">check_circle</span> Foto lista`;
+        label.innerHTML = `<span class="material-symbols-outlined">check_circle</span> Archivo seleccionado`;
     } else {
         label.style.backgroundColor = "#5f8fd7";
-        label.innerHTML = `<span class="material-symbols-outlined">image</span> Adjuntar`;
+        label.innerHTML = `<span class="material-symbols-outlined">upload</span> Adjuntar`;
     }
 });
 window.rendernewMessage = rendernewMessage;

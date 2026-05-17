@@ -13,7 +13,7 @@ body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
-    font-family: sans-serif; /* Una fuente más limpia para empezar */
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Base profesional para todo el sitio */
 }
 
 /* 3. Hacemos que las imágenes y videos sean fáciles de manejar */

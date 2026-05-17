@@ -174,8 +174,8 @@ async function renderMessages() {
         messageElement.innerHTML = `
             <h3>${msg.user}</h3>
             <p>${msg.text}</p>
-            <h5>${fechaLegible}</h5>
             ${fileHtml}
+            <h5>${fechaLegible}</h5>
             ${msg.user === miNombre ? `<button onclick="eliminarMensaje('${msg.id}','${msg.user}')" id="eliminarMensaje"><span class="material-symbols-outlined" id="deleteico">delete</span></button>` : ''}
             <hr>
         `;

@@ -5,7 +5,7 @@ body {
     background-image: linear-gradient(45deg, rgba(0,0,0,0.01) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.01) 50%, rgba(0,0,0,0.01) 75%, transparent 75%, transparent);
     background-size: 100px 100px;
     color: #1a1a1a; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
@@ -16,12 +16,14 @@ h1 {
     color: #333;
     margin-top: 20px;
     font-weight: 300;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 h2 {
     color: firebrick;
     margin-bottom: 3vh;
-    font-family:'Times New Roman', Times, serif;
-    font-size: 1.8rem;    
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.8rem;
+    font-weight: bold;
 }
 input{
     height: 5vh;
@@ -92,7 +94,7 @@ input{
     align-items: center;
     justify-content: center;
     background: transparent;
-    color: #c62828;
+    color: #ffffff;
     border: 2px solid rgba(198,40,40,0.12);
     padding: 0.55rem 0.9rem;
     border-radius: 12px;
@@ -181,6 +183,7 @@ input{
     justify-items: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
     border: none;
+    z-index: 9998;
 }
 
 .buttonlateral{
@@ -239,7 +242,7 @@ input{
     font-size: 1.5rem;
     color: #2c3e50;
     margin-bottom: 10px;
-    font-family: 'Times New Roman', serif; /* Estilo periódico */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .noticias p {
@@ -249,6 +252,7 @@ input{
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     align-self: flex-end;    
 }
 
@@ -279,6 +283,39 @@ input{
     bottom: 0.5vh;
     margin-top: 3vh;
 }
+
+/* El contenedor que bloquea los clicks */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Por encima de TODO */
+    cursor: wait; /* Cambia el cursor a un reloj/circulo de carga */
+    transition: opacity 0.3s ease;
+}
+
+/* El círculo giratorio (Spinner) */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #5f8fd7; /* El azul de tus botones */
+    border-radius: 50%;
+    animation: girar 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes girar {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 /* ===== MEDIA QUERY PARA MÓVILES (max-width: 600px) ===== */
 @media (max-width: 600px) {
     body {
@@ -286,7 +323,7 @@ input{
         background-image: linear-gradient(45deg, rgba(0,0,0,0.01) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.01) 50%, rgba(0,0,0,0.01) 75%, transparent 75%, transparent);
         background-size: 100px 100px;
         color: #1a1a1a;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         margin: 0;
         padding: 0;
         display: flex;
@@ -299,6 +336,7 @@ input{
         margin-top: 10vh;
         font-weight: 300;
         font-size: 1.5rem;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
 
     #searchbar {
@@ -312,8 +350,9 @@ input{
     h2 {
         color: firebrick;
         margin-bottom: 2vh;
-        font-family:'Times New Roman', Times, serif;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-size: 1.3rem;
+        font-weight: bold;
     }
 
     input {
@@ -443,10 +482,12 @@ input{
 
     .noticias h3 {
         font-size: 1.3rem;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
 
     .noticias p {
         font-size: 0.9rem;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
     #buttoncontainerpanel {
@@ -468,6 +509,7 @@ input{
         background-color: #f0f0f0;
         border: 2px solid #ccc;
         border-radius: 5px;
+        z-index: 9998;
     }
 
     .buttonlateral {

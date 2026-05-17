@@ -3,6 +3,8 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 const supabaseUrl = 'https://mtdblkrntsoeilwmhzgn.supabase.co';
 const supabaseKey = 'sb_publishable_GKCUvPhh26exHDuzbRtaAg_i2dulF0-'; 
 const supabase = createClient(supabaseUrl, supabaseKey);
+const pantallaCarga = document.getElementById("pantalla-carga");
+pantallaCarga.style.display = "none";
 
 async function Getuserdata(){
     const { data: { user }, error } = await supabase.auth.getUser();
@@ -10,8 +12,6 @@ async function Getuserdata(){
     return user;
 }
 
-// Exponer función al window
-window.Getuserdata = Getuserdata;
 
 // Inicializar después de que el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
@@ -35,7 +35,7 @@ async function guardarNoticia() {
     const FileInput = document.getElementById('fileInput');
     const file = FileInput.files?.[0];
     let fileUrl = null;
-
+    pantallaCarga.style.display = "flex";
     if (file) {
         const fileName = `${Date.now()}_${file.name}`;
         const { data: uploadData, error: uploadError } = await supabase.storage
@@ -44,6 +44,7 @@ async function guardarNoticia() {
         if (uploadError) {
             console.error('Error al subir archivo:', uploadError);
             window.alert("Error al subir el archivo. Por favor, inténtalo de nuevo.");
+            pantallaCarga.style.display = "none";
             return;
         }
         console.log('Archivo subido:', uploadData);
@@ -53,6 +54,7 @@ async function guardarNoticia() {
         if (urlError) {
             console.error('Error al obtener URL pública:', urlError);
             window.alert("Error al obtener la URL de la imagen. Por favor, inténtalo de nuevo.");
+            pantallaCarga.style.display = "none";
             return;
         }
         console.log('URL pública obtenida:', ulrData);
@@ -67,7 +69,10 @@ async function guardarNoticia() {
         imagen: fileUrl
      }];
      (nuevaNoticia[0].titulo === '' || nuevaNoticia[0].noticia === '') ? window.alert("Por favor, completa todos los campos antes de guardar."): null;
-        if (nuevaNoticia[0].titulo === '' || nuevaNoticia[0].noticia === '') return;
+        if (nuevaNoticia[0].titulo === '' || nuevaNoticia[0].noticia === ''){
+                    pantallaCarga.style.display = "none";
+                 return;
+                }
     const { error } = await supabase 
     .from('noticias')
     .insert(nuevaNoticia);
@@ -75,8 +80,11 @@ async function guardarNoticia() {
      if (error) {
         console.error('Error al guardar:', error);
         window.alert("Error al guardar la noticia. Por favor, inténtalo de nuevo.");
+        pantallaCarga.style.display = "none";
+        return;
     } else {
         alert('Noticia guardada exitosamente');
+        pantallaCarga.style.display = "none";
         document.getElementById('titulonoticia').value = '';
         document.getElementById('noticia').value = '';
         ventana.style.display = "none";
@@ -176,6 +184,7 @@ function limpiarBusqueda() {
     document.getElementById('mondongo').value = '';
     obtenerNoticias();
 }
+window.Getuserdata = Getuserdata;
 window.limpiarBusqueda = limpiarBusqueda;
 window.searchnews = searchnews;
 window.changeSection = changeSection;

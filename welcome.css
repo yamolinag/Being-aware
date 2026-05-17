@@ -4,7 +4,7 @@ body {
     background-image: linear-gradient(45deg, rgba(0,0,0,0.01) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.01) 50%, rgba(0,0,0,0.01) 75%, transparent 75%, transparent);
     background-size: 100px 100px;
     color: #1a1a1a; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
@@ -16,13 +16,15 @@ h1 {
     color: #333;
     margin-top: 20px;
     font-weight: 300;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 h2 {
     color: firebrick;
     margin: 3vh 7vw;
-    font-family:'Times New Roman', Times, serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 1.8rem;
+    font-weight: bold;
 }
 
 
@@ -106,6 +108,7 @@ button:hover {
     justify-items: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
     border: none;
+    z-index: 9998;
 }
 
 .buttonlateral{
@@ -154,7 +157,7 @@ button:hover {
         background-image: linear-gradient(45deg, rgba(0,0,0,0.01) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.01) 50%, rgba(0,0,0,0.01) 75%, transparent 75%, transparent);
         background-size: 100px 100px;
         color: #1a1a1a;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         margin: 0;
         padding: 0;
         display: flex;
@@ -167,13 +170,15 @@ button:hover {
         margin-top: 10vh;
         font-weight: 300;
         font-size: 1.5rem;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
 
     h2 {
         color: firebrick;
         margin: 2vh 5vw;
-        font-family:'Times New Roman', Times, serif;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-size: 1.3rem;
+        font-weight: bold;
     }
 
     button {
@@ -249,6 +254,7 @@ button:hover {
         background-color: #f0f0f0;
         border: 2px solid #ccc;
         border-radius: 5px;
+        z-index: 9998;
     }
 
     .buttonlateral {
@@ -290,5 +296,9 @@ button:hover {
 
     .logininput {
         margin: 1vh 0;
+    }
+
+    p {
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 }

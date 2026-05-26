@@ -1,15 +1,16 @@
 body {
-   
-    background-color: #f9f7f2; 
-    background-image: linear-gradient(45deg, rgba(0,0,0,0.01) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.01) 50%, rgba(0,0,0,0.01) 75%, transparent 75%, transparent);
-    background-size: 100px 100px;
-    color: #1a1a1a; 
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    background-image: url('fondo.jpg'); 
+    background-repeat: no-repeat; 
+    background-position: center; 
+    background-attachment: fixed; 
+    background-size: cover; 
+    background-color: #f4f7fc; 
+}
+
+header{
     display: flex;
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
 }
 
 h1 {
@@ -38,7 +39,7 @@ h2 {
     flex-direction: column;
     align-items: flex-start;
     margin: 10px 15px;
-    border-radius: 15px 15px 15px 0px;
+    border-radius: 30px 30px 30px 0px;
     padding: 12px;
     width: fit-content;
     max-width: 75vw;
@@ -56,7 +57,7 @@ h2 {
     flex-direction: column;
     align-items: flex-end;
     margin: 10px 15px;
-    border-radius: 15px 15px 0px 15px;
+    border-radius: 30px 30px 0px 30px;
     padding: 12px;
     width: fit-content;
     max-width: 75vw;
@@ -231,11 +232,12 @@ h2 {
 /* ===== MEDIA QUERY PARA MÓVILES (max-width: 600px) ===== */
 @media (max-width: 600px) {
     body {
-        background-color: #f9f7f2;
-        background-image: linear-gradient(45deg, rgba(0,0,0,0.01) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.01) 50%, rgba(0,0,0,0.01) 75%, transparent 75%, transparent);
-        background-size: 100px 100px;
-        color: #1a1a1a;
-        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        background-image: url('fondo.jpg'); 
+        background-repeat: no-repeat; 
+        background-position: center; 
+        background-attachment: fixed; 
+        background-size: cover; 
+        background-color: #f4f7fc; 
         margin: 0;
         padding: 0;
         display: flex;
@@ -251,12 +253,19 @@ h2 {
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
 
+    h2, h3 {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-weight: bold;
+    }
+
     h2 {
         color: firebrick;
         margin-bottom: 2vh;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-size: 1.3rem;
-        font-weight: bold;
+    }
+
+    p {
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
     #messagecontainer {

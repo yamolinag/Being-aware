@@ -11,6 +11,15 @@
 
 </head>
 <body>
+    <header>
+          <H1>Being aware</H1>
+  <H2>Noticias</H2>
+  <div id="searchbar">
+    <input type="text"id="mondongo"placeholder="Buscar..."></input>
+    <button onclick="searchnews()"><span class="material-symbols-outlined">search</span></button>
+    <button onclick="limpiarBusqueda()"><span class="material-symbols-outlined">clear</span></button>
+  </div>
+    </header>
        <details id="panellateral">
         <summary><span class="material-symbols-outlined">menu</span></summary>
 <div id="buttoncontainerpanel">
@@ -19,13 +28,6 @@
     <button onclick="changeSection('news.html')" class="buttonlateral"><span class="material-symbols-outlined">newspaper</span></button>
 </div>
     </details>
-  <div id="searchbar">
-    <input type="text"id="mondongo"placeholder="Buscar..."></input>
-    <button onclick="searchnews()"><span class="material-symbols-outlined">search</span></button>
-    <button onclick="limpiarBusqueda()"><span class="material-symbols-outlined">clear</span></button>
-  </div>
-  <H1>Being aware</H1>
-  <H2>Noticias</H2>
   <div id="contenedornoticias"></div>
   <div id="ventana">
  <div class="seccionventana">

@@ -22,7 +22,7 @@ async function cerrarSesion() {
     }
 }
 function registrarse(){
-    login()
+loginContainer.style.display = 'block';
 }
 
 async function Getuserdata(){
@@ -52,7 +52,7 @@ async function login() {
     const Username = document.getElementById('User').value;
     const EMail = document.getElementById('E-mail').value;
     const Password = document.getElementById('Password').value;
-    loginContainer.style.display = 'block';
+
     if(Password.length < 6){
         window.alert("La contraseña debe tener al menos 6 caracteres.");
         return;
@@ -92,8 +92,9 @@ const {data, error} = await supabase.auth.signUp({
             window.alert("Error al iniciar sesión: " + error.message);
         } else {
             console.log('Usuario conectado:', data);
-            location.reload();
+            loginContainer.style.display = 'none';
             window.alert("Has iniciado sesión exitosamente.");
+            location.reload();
         }
     }
 

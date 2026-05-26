@@ -1,16 +1,19 @@
 body {
-   
-    background-color: #f9f7f2; 
-    background-image: linear-gradient(45deg, rgba(0,0,0,0.01) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.01) 50%, rgba(0,0,0,0.01) 75%, transparent 75%, transparent);
-    background-size: 100px 100px;
-    color: #1a1a1a; 
+    background-image: url('fondo.jpg'); 
+    background-repeat: no-repeat; 
+    background-position: center; 
+    background-attachment: fixed; 
+    background-size: cover; 
+    background-color: #f4f7fc; 
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
+
+header{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 
 h1 {
     color: #333;
@@ -135,28 +138,43 @@ button:hover {
 
 #logincontainer{
     position: fixed;
-    top: 15vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
-    align-items:end;
+    align-items: center;
     flex-direction: column;
+    width: min(400px, 90vw);
+    height: auto;
+    padding: 2.5rem;
+    background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+    border: 1px solid rgba(13,71,161,0.12);
+    border-radius: 20px;
+    box-shadow: 0 32px 72px rgba(6,24,50,0.18), 0 6px 18px rgba(13,71,161,0.06);
+    z-index: 10000;
+}
+
+.logininput input, #logincontainer input {
     width: 100%;
-    height: 96vh;
-    padding: 2vh;
-    background-color: rgb(211, 195, 174);
-    border: 2px solid #aeb9ef;
-    border-radius: 10px;
-    width: 30vw;
-    height: 70vh;
+    height: 5vh;
+    margin: 1.5vh 0;
+    border: none;
+    background-color: #f1f3f5;
+    border-radius: 8px;
+    padding: 0 15px;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 /* ===== MEDIA QUERY PARA MÓVILES (max-width: 600px) ===== */
 @media (max-width: 600px) {
     body {
-        background-color: #f9f7f2;
-        background-image: linear-gradient(45deg, rgba(0,0,0,0.01) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.01) 50%, rgba(0,0,0,0.01) 75%, transparent 75%, transparent);
-        background-size: 100px 100px;
-        color: #1a1a1a;
+        background-image: url('fondo.jpg'); 
+        background-repeat: no-repeat; 
+        background-position: center; 
+        background-attachment: fixed; 
+        background-size: cover; 
+        background-color: #f4f7fc; 
         font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         margin: 0;
         padding: 0;
@@ -173,12 +191,15 @@ button:hover {
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
 
+    h2, h3 {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-weight: bold;
+    }
+
     h2 {
         color: firebrick;
         margin: 2vh 5vw;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-size: 1.3rem;
-        font-weight: bold;
     }
 
     button {
@@ -279,23 +300,18 @@ button:hover {
 
     #logincontainer {
         position: fixed;
-        top: 15vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         display: flex;
         justify-content: center;
-        align-items: end;
+        align-items: center;
         flex-direction: column;
         width: 90vw;
-        height: auto;
-        padding: 2vh;
-        background-color: rgb(211, 195, 174);
-        border: 2px solid #aeb9ef;
-        border-radius: 10px;
+        padding: 2rem;
         max-height: 80vh;
         overflow-y: auto;
-    }
-
-    .logininput {
-        margin: 1vh 0;
+        background: white; /* Consistencia en móvil */
     }
 
     p {

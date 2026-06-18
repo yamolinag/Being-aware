@@ -6,13 +6,17 @@ const supabaseKey = 'sb_publishable_GKCUvPhh26exHDuzbRtaAg_i2dulF0-';
 const supabase = createClient(supabaseUrl, supabaseKey);
 const messageContainer = document.getElementById('messagecontainer');
 async function Getuserdata(){
-const { data: { user }, error } = await supabase.auth.getUser();
+    const { data: { user }, error } = await supabase.auth.getUser();
     if (error || !user) return null;
-    return user;;
+    return user;
 }
-const usuarioActivo = await Getuserdata();
+
+function autoScroll() {
+window.scrollTo(0, document.body.scrollHeight);
+}
 
 async function enviarMensaje() {
+    const usuarioActivo = await Getuserdata();
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
     const textInput = document.getElementById('textInput');
@@ -86,6 +90,21 @@ async function enviarMensaje() {
         console.log('No se ha seleccionado ningún archivo, enviando solo el mensaje de texto.');
     }
 
+    if (!usuarioActivo) {
+        alert('Debes iniciar sesión para enviar un mensaje.');
+        return;
+    }
+
+    const { data: avatarData, error: avatarError } = await supabase
+        .from('perfiles')
+        .select('imageulr')
+        .eq('userid', usuarioActivo.id)
+        .maybeSingle();
+    if (avatarError) {
+        console.error('Error al obtener la URL del avatar:', avatarError);
+    }
+    const avatarUrl = avatarData?.imageulr ?? null;
+
     const { error } = await supabase
         .from('mensajes')
         .insert([{
@@ -93,6 +112,7 @@ async function enviarMensaje() {
             user: usuarioActivo.user_metadata.display_name,
             date: new Date().toISOString(),
             fileurl: fileUrl,
+            avatarurl: avatarUrl || null
            }]);
 
     if (error) {
@@ -138,7 +158,7 @@ async function rendernewMessage() {
             : `\n                <a href="${msg.fileurl}" target="_blank" download class="btn-descargar">\n                    <span class="material-symbols-outlined">download</span> Descargar documento\n                </a>\n            `)
             : '';
         messageElement.innerHTML = `
-            <h3>${msg.user}</h3>
+            ${msg.user === miNombre ? `<div id="userinformation"><h3>${msg.user}</h3><img id="avatarMensaje" src="${msg.avatarurl || 'default-avatar.png'}" alt="Avatar del usuario"></div>`:`<div id="userinformation"><img id="avatarMensaje" src="${msg.avatarurl || 'default-avatar.png'}" alt="Avatar del usuario"><h3>${msg.user}</h3></div>`}
             <p>${msg.text}</p>
             <h5>${fechaLegible}</h5>
             ${fileHtml}
@@ -172,7 +192,9 @@ async function renderMessages() {
             : `\n                <a href="${msg.fileurl}" target="_blank" download class="btn-descargar">\n                    <span class="material-symbols-outlined">download</span> Descargar documento\n                </a>\n            `)
             : '';
         messageElement.innerHTML = `
-            <h3>${msg.user}</h3>
+            ${msg.user === miNombre ? `<div id="userinformation"><h3>${msg.user}</h3><img id="avatarMensaje" src="${msg.avatarurl || 'default-avatar.png'}" alt="Avatar del usuario"></div>`:`<div id="userinformation"><img id="avatarMensaje" src="${msg.avatarurl || 'default-avatar.png'}" alt="Avatar del usuario"><h3>${msg.user}</h3></div>`}
+
+            
             <p>${msg.text}</p>
             ${fileHtml}
             <h5>${fechaLegible}</h5>
@@ -182,7 +204,7 @@ async function renderMessages() {
 
         messageContainer.prepend(messageElement);
     });
-    window.scrollTo(0, document.body.scrollHeight);
+    autoScroll();
 }
 
 async function eliminarMensaje(params,usuarioMensaje) {
@@ -229,13 +251,17 @@ const canalMensajes = supabase
   )
   .subscribe();
 async function changeSection(section) {
+    if (section === 'index.html' || section === 'cuenta.html') {
+        window.location.href = section;
+        return;
+    }
     const usuarioActivo = await Getuserdata();
     if (!usuarioActivo) {
         alert("Debes iniciar sesión para acceder a esta sección.");
+        window.location.href = 'cuenta.html';
         return;
-    }else{
-        window.location.href = section;
     }
+    window.location.href = section;
 }
 
 document.getElementById('fileInput').addEventListener('change', function() {
@@ -253,3 +279,4 @@ window.changeSection = changeSection;
 window.enviarMensaje = enviarMensaje;
 renderMessages();
 window.eliminarMensaje = eliminarMensaje;
+window.autoScroll = autoScroll;

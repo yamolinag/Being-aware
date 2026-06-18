@@ -14,11 +14,11 @@
     <header>
         <h1>Being aware</h1>
                 <h2>Foro</h2>
-        <p>¡Mantente al tanto de la situación del colegio! Aquí encontrarás información actualizada sobre eventos, actividades y noticias relacionadas con nuestra comunidad escolar. ¡No te pierdas nada importante!</p>
     </header>
        <details id="panellateral">
         <summary><span class="material-symbols-outlined">menu</span></summary>
 <div id="buttoncontainerpanel">
+    <button onclick="changeSection('cuenta.html')" class="buttonlateral"><span class="material-symbols-outlined">account_circle</span></button>
     <button onclick="changeSection('index.html')"class="buttonlateral"><span class="material-symbols-outlined">home</span></button>
     <button onclick="changeSection('Being_aware_Forum.html')"class="buttonlateral"><span class="material-symbols-outlined">forum</span></button>
             <button onclick="changeSection('news.html')"class="buttonlateral"><span class="material-symbols-outlined">newspaper</span></button>    
@@ -42,6 +42,7 @@
         <button onclick="enviarMensaje()"><span class="material-symbols-outlined" id="sendico">send</span></button>
     </div>
 </div>
+<button onclick="autoScroll()" id="autoScroll"><span class="material-symbols-outlined">arrow_drop_down_circle</span></button>
     </section>
     <script type="module" src="Being_aware_Forum.js"></script>
 </body>

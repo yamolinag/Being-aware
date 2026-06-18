@@ -229,25 +229,13 @@ const canalMensajes = supabase
   )
   .subscribe();
 async function changeSection(section) {
-    const paginasPublicas = [
-        'index.html',
-        'Being_aware_Forum.html',
-        'news.html'
-    ];
-
-    if (paginasPublicas.includes(section)) {
-        window.location.href = section;
-        return;
-    }
-
-
     const usuarioActivo = await Getuserdata();
     if (!usuarioActivo) {
         alert("Debes iniciar sesión para acceder a esta sección.");
         return;
+    }else{
+        window.location.href = section;
     }
-
-    window.location.href = section;
 }
 
 document.getElementById('fileInput').addEventListener('change', function() {

@@ -131,25 +131,14 @@ function rennderNews(news) {
         `;
         newsContainer.appendChild(noticiaElement);
     });
-}async function changeSection(section) {
-    const paginasPublicas = [
-        'index.html',
-        'Being_aware_Forum.html',
-        'news.html'
-    ];
-
-    if (paginasPublicas.includes(section)) {
-        window.location.href = section;
-        return;
-    }
-
+async function changeSection(section) {
     const usuarioActivo = await Getuserdata();
     if (!usuarioActivo) {
         alert("Debes iniciar sesión para acceder a esta sección.");
         return;
+    }else{
+        window.location.href = section;
     }
-
-    window.location.href = section;
 }
 document.getElementById('fileInput').addEventListener('change', function() {
     const label = document.querySelector('.custom-file-upload');
@@ -160,8 +149,7 @@ document.getElementById('fileInput').addEventListener('change', function() {
         label.style.backgroundColor = "#5f8fd7";
         label.innerHTML = `<span class="material-symbols-outlined">image</span> Añadir foto de la noticia`;
     }
-});
-
+});}
 async function searchnews(){
     const search = document.getElementById('mondongo').value.toLowerCase();
     const { data, error } = await supabase

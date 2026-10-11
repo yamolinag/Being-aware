@@ -29,6 +29,7 @@ h2 { color: firebrick; margin: 10px 0; font-family: 'Trebuchet MS', sans-serif; 
     gap: 40px;
     flex-wrap: wrap;
     justify-content: center;
+    display: none;
 }
 
 #update-form {
@@ -57,9 +58,15 @@ h2 { color: firebrick; margin: 10px 0; font-family: 'Trebuchet MS', sans-serif; 
     text-align: center;
 }
 
-.logininput { margin-bottom: 1.5rem; text-align: left; }
-.logininput label { display: block; margin-bottom: 5px; font-weight: bold; }
-.logininput input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; }
+.logininput { 
+    margin-bottom: 1.5rem; text-align: left; 
+}
+.logininput label { 
+    display: block; margin-bottom: 5px; font-weight: bold; 
+}
+.logininput input { 
+    width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; 
+}
 
 .main-auth-btn, #logout-btn {
     width: 100%;

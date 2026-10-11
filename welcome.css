@@ -65,8 +65,7 @@ button:hover {
 }
 .sectionbutton:hover {
     background-color: #5fd767;
-    width: 24vw;
-    height: 29vh;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 1);
     color: rgba(230, 71, 71, 0.952);
     border: 2px solid #850c08;
 }

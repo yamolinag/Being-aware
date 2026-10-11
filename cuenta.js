@@ -173,6 +173,8 @@ async function actualizarPerfil() {
             }
         }
     }
+    const updateForm = document.getElementById('update-form');
+    updateForm.style.display = 'none';
 }
 
 async function changeSection(section) {

@@ -275,6 +275,12 @@ header{
 
 /* ===== MEDIA QUERY PARA MÓVILES (max-width: 600px) ===== */
 @media (max-width: 600px) {
+    #autoScroll {
+        bottom: 70px;
+        right: 15px;
+        padding: 8px;
+        font-size: 1.2rem;
+    }
     body {
         background-image: url('fondo.jpg'); 
         background-repeat: no-repeat; 

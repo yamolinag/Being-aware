@@ -10,6 +10,14 @@ async function Getuserdata(){
     if (error || !user) return null;
     return user;
 }
+ async function verifyUser() {
+    const usuarioActivo = await Getuserdata();
+  if (!usuarioActivo) {
+        alert("Debes iniciar sesión para acceder a esta sección.");
+        window.location.href = 'cuenta.html';
+    }
+}
+verifyUser();
 
 function autoScroll() {
 window.scrollTo(0, document.body.scrollHeight);
@@ -21,6 +29,8 @@ async function enviarMensaje() {
     const file = fileInput.files[0];
     const textInput = document.getElementById('textInput');
     const texto = textInput.value;
+        textInput.value = '';
+        fileInput.value = '';
 
     if (!texto.trim()) {
         alert('Por favor, ingresa un mensaje antes de enviar.');
@@ -118,8 +128,7 @@ async function enviarMensaje() {
     if (error) {
         console.error('Error al enviar:', error);
     } else {
-        textInput.value = '';
-        fileInput.value = '';
+        console.log('Mensaje enviado exitosamente');
     }
     const label = document.querySelector('.custom-file-upload');
 label.style.backgroundColor = "#5f8fd7";

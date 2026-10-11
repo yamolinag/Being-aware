@@ -12,6 +12,15 @@ async function Getuserdata(){
     return user;
 }
 
+ async function verifyUser() {
+    const usuarioActivo = await Getuserdata();
+  if (!usuarioActivo) {
+        alert("Debes iniciar sesión para acceder a esta sección.");
+        window.location.href = 'cuenta.html';
+    }
+}
+verifyUser();
+
 
 // Inicializar después de que el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {

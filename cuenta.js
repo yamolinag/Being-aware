@@ -15,13 +15,15 @@ async function verificarSesion() {
     const authForms = document.getElementById('auth-forms');
     const userInfo = document.getElementById('user-info');
     const activeUserMsg = document.getElementById('active-user-msg');
-
+    const avatar = document.getElementById('useravatar');
     if (!userdata) {
         authForms.style.display = 'flex';
         userInfo.style.display = 'none';
+        avatar.style.display = 'none';
     } else {
         authForms.style.display = 'none';
         userInfo.style.display = 'block';
+        avatar.style.display = 'block';
         activeUserMsg.textContent = `${userdata.user_metadata.display_name || userdata.email}`;
     }
 }
@@ -86,16 +88,20 @@ async function cerrarSesion() {
 
 function editarPerfil() {
     const updateForm = document.getElementById('update-form');
+    const userInfo = document.getElementById('user-info')
     updateForm.style.display = 'block';
+    userInfo.style.display = 'none'
 }
 
 function cancelar(op){
     const userInfo = document.getElementById('user-info');
+    const avatar = document.getElementById('useravatar');
     switch(op){
         case 1:
             const updateForm = document.getElementById('update-form');
             updateForm.style.display = 'none';
-            userInfo.style.display = 'block'
+            userInfo.style.display = 'block';
+            avatar.style.display = 'block';
             break
         case 2:
             const passform = document.getElementById("pass-form")
@@ -186,18 +192,21 @@ async function actualizarPerfil() {
     }
     const updateForm = document.getElementById('update-form');
     updateForm.style.display = 'none';
+    location.reload(true)
 }
 
 function passform() {
     const passform = document.getElementById("pass-form")
     const authForms = document.getElementById('auth-forms');
     const userInfo = document.getElementById('user-info');
+    const avatar = document.getElementById('useravatar');
     const updateForm = document.getElementById('update-form');
     const pass = document.getElementById("Userpasword")
     updateForm.style.display = 'none';
     passform.style.display = 'block'
     authForms.style.display = 'none'
     userInfo.style.display = 'none'
+    avatar.style.display = 'none';
     pass.textContent = ""
 }
 
@@ -253,7 +262,7 @@ async function renderAvatar(){
     if (!url) {
         avatarImg.innerHTML = `<p id="acountcircul"><span class="material-symbols-outlined">account_circle</span></p>`;
     } else {
-        avatarImg.innerHTML = `<img id="acountavatar" src="${url}" alt="Avatar">`;
+        avatarImg.innerHTML = `<img src="${url}" alt="Avatar">`;
     }
 }
 window.login = login;

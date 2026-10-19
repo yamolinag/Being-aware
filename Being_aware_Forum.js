@@ -20,7 +20,7 @@ async function Getuserdata(){
 verifyUser();
 
 function autoScroll() {
-window.scrollTo(0, document.body.scrollHeight);
+window.scrollTo({top:  document.body.scrollHeight, behavior: 'smooth'});
 }
 
 async function enviarMensaje() {

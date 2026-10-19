@@ -371,25 +371,6 @@ input{
 
     #ventana {
         position: fixed;
-        width: 90vw;
-        height: auto;
-        display: flex;
-        border: 2px solid black;
-        background-color: white;
-        padding: 4vw;
-        justify-content: space-around;
-        flex-direction: column;
-        align-items: center;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        max-height: 80vh;
-        overflow-y: auto;
-        z-index: 1001;
-    }
-
-    #ventana {
-        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -405,7 +386,6 @@ input{
         overflow-y: auto;
         z-index: 9999;
         backdrop-filter: blur(4px) saturate(120%);
-        position: fixed;
     }
 
     /* banda superior decorativa tipo cabecera */
@@ -513,10 +493,11 @@ input{
         position: fixed;
         top: 0;
         left: 0;
-        width: 18vw;
+        width: 16vw;
+        padding: 0.65rem 0.25rem;
         background-color: #f0f0f0;
         border: 2px solid #ccc;
-        border-radius: 5px;
+        border-radius: 14px;
         z-index: 9998;
     }
 
@@ -555,5 +536,10 @@ input{
         height: 2px;
         background-color: #ccc;
         margin-bottom: 1vh;
+    }
+
+    #subirnoticia{
+        width: 50px;
+        height: 50px;
     }
 }

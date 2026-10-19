@@ -49,6 +49,23 @@ h2 { color: firebrick; margin: 10px 0; font-family: 'Trebuchet MS', sans-serif; 
     display: none;
 }
 
+#pass-form{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: min(400px, 90vw);
+    text-align: center;
+    display: none;
+}
+
 #register-section, #login-section, #user-info {
     background: white;
     padding: 2rem;

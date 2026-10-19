@@ -177,6 +177,7 @@ async function rendernewMessage() {
 
         messageContainer.appendChild(messageElement);
         window.scrollTo(0, document.body.scrollHeight);
+        console.log(msg)
 }
 
 async function renderMessages() {
@@ -214,10 +215,12 @@ async function renderMessages() {
         messageContainer.prepend(messageElement);
     });
     autoScroll();
+    console.table(mensajes)
 }
 
 async function eliminarMensaje(params,usuarioMensaje) {
-    const usuarioActivo = await Getuserdata();
+    if(window.confirm("Estas seguro de que quieres borrar este mensaje, recuerda que los mensajes borrados no se pueden recuperar.")){
+        const usuarioActivo = await Getuserdata();
     if (!usuarioActivo) {
         alert("Debes iniciar sesión para eliminar un mensaje");
         return;
@@ -237,6 +240,11 @@ async function eliminarMensaje(params,usuarioMensaje) {
     }
     if (usuarioMensaje !== usuarioActivo.user_metadata.display_name) {
         window.alert('No puedes eliminar un mensaje que no es tuyo, Recuerda que los mensajes eliminados no se pueden recuperar, por lo que debes estar seguro antes de eliminar un mensaje.');
+    }
+    }
+    else{
+        console.log("Borrado abortado")
+        window.alert("El mensaje no se borró")
     }
 }
 

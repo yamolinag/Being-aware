@@ -89,9 +89,20 @@ function editarPerfil() {
     updateForm.style.display = 'block';
 }
 
-function cancelar(){
-    const updateForm = document.getElementById('update-form');
-    updateForm.style.display = 'none';
+function cancelar(op){
+    const userInfo = document.getElementById('user-info');
+    switch(op){
+        case 1:
+            const updateForm = document.getElementById('update-form');
+            updateForm.style.display = 'none';
+            userInfo.style.display = 'block'
+            break
+        case 2:
+            const passform = document.getElementById("pass-form")
+            passform.style.display = 'none'
+            editarPerfil()
+            break
+    }
 }
 
 async function actualizarPerfil() {
@@ -177,6 +188,38 @@ async function actualizarPerfil() {
     updateForm.style.display = 'none';
 }
 
+function passform() {
+    const passform = document.getElementById("pass-form")
+    const authForms = document.getElementById('auth-forms');
+    const userInfo = document.getElementById('user-info');
+    const updateForm = document.getElementById('update-form');
+    const pass = document.getElementById("Userpasword")
+    updateForm.style.display = 'none';
+    passform.style.display = 'block'
+    authForms.style.display = 'none'
+    userInfo.style.display = 'none'
+    pass.textContent = ""
+}
+
+async function savepass() {
+    if(window.confirm("Estas seguro que quieres cambiar tu contraseña, si la pierdes no podrás recuperar tu cuenta")){
+        const pass = document.getElementById("Userpasword").value
+        const {error} = await supabase.auth.updateUser({
+        password:pass
+    })
+    window.alert("Se ha actualizado tu contraseña, asegurate de guardarla muy bien")
+    cancelar(2)
+    if(error){
+        window.alert("ha habido un error, no se ha podido actualizar su contraseña")
+        cancelar(2)
+    }
+    }
+    else{
+        window.alert("Se canceló la actualizació")
+        cancelar(2)
+    }
+}
+
 async function changeSection(section) {
     const usuarioActivo = await Getuserdata();
     if (section === 'index.html' || section === 'cuenta.html') {
@@ -222,6 +265,8 @@ window.editarPerfil = editarPerfil;
 window.actualizarPerfil = actualizarPerfil;
 window.cancelar = cancelar;
 window.renderAvatar = renderAvatar;
+window.passform = passform
+window.savepass = savepass
 
 verificarSesion();
 renderAvatar();

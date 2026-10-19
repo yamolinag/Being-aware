@@ -26,7 +26,7 @@
     </details>
 
     <div id="update-form">
-        <button onclick="cancelar()" id="cancelar"><span class="material-symbols-outlined">close</span></button>
+        <button onclick="cancelar(1)" id="cancelar"><span class="material-symbols-outlined">close</span></button>
         <H1>Editar Perfil</H1>
         <p>Actualiza tu información de perfil. Los campos que no rellenes permanecerán sin cambios.</p>
         <div class="logininput">
@@ -41,8 +41,18 @@
             <label for="E-mail">E-mail</label>
             <input type="email" id="E-mailupdate" placeholder="Tu correo electrónico">
             <button onclick="actualizarPerfil()" class="main-auth-btn"><span class="material-symbols-outlined">published_with_changes</span>Actualizar</button>
-            <button class="main-auth-btn"><span class="material-symbols-outlined">key</span> Cambiar Contraseña</button>
+            <button onclick="passform()" class="main-auth-btn"><span class="material-symbols-outlined">key</span> Cambiar Contraseña</button>
         </div>
+    </div>
+
+    <div id="pass-form">
+        <button onclick="cancelar(2)" id="cancelar"><span class="material-symbols-outlined">close</span></button>
+        <H1>Editar contraseña</H1>
+        <div class="logininput">
+            <label for="Password">Contraseña</label>
+            <input type="password" id="Userpasword">
+        </div>
+        <button onclick="savepass()" class="main-auth-btn"><span class="material-symbols-outlined">save</span> Guardar Contraseña</button>
     </div>
 
     <main id="main-content">
